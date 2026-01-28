@@ -1,26 +1,5 @@
 # Datenbank – Bibliothek
 
-## DBdiagram (Read-only)
-https://dbdiagram.io/d/Bibliothek-6965f6acd6e030a024de05e4
-
-## Dateien
-- `db/schema.dbml` – DBML-Schema (Quelle: dbdiagram.io)
-- `db/schema.sql` – SQL-Export
-- `docs/erd.svg` – ER-Diagramm-Export
-
-## Kurzbeschreibung
-Modell eines Bibliothekssystems mit den wichtigsten Entitäten:
-- `personen` (Basisdaten)
-- `kunden` und `mitarbeiter` als 1:1-Erweiterungen von `personen`
-- `bÜcher` (Bücher)
-- `ausleihe` (Ausleihen) + `loan_items` (Ausleihpositionen)
-- `strafen` (Strafen im Zusammenhang mit Ausleihen)
-
-![ERD](docs/erd.svg)
-
-
-# Datenbank – Bibliothek
-
 Dieses Repository enthält das Datenbankmodell (DBML) für ein Bibliothekssystem, erstellt mit dbdiagram.io.
 
 ## DBdiagram (Read-only Link)
