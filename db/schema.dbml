@@ -1,0 +1,76 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table personen {
+  id integer [primary key]
+  vorname varchar [not null]
+  nachname varchar [not null]
+  email varchar [not null, unique]
+  telefon varchar
+  created_at timestamp
+}
+
+/* 1:1 Extension von Personen -> Kunde */
+Table kunden {
+  person_id integer [primary key] // PK = FK => 1:1
+  mitgliedsnummer varchar [unique]
+  join_date date [not null]
+}
+
+/* 1:1 Extension von Personen -> Mitarbeiter */
+Table mitarbeiter {
+  person_id integer [primary key] // PK = FK => 1:1
+  position varchar
+  hire_date date
+}
+
+/* Titel/Metadaten */
+Table buecher {
+  id integer [primary key]
+  titel varchar [not null]
+  autor varchar [not null]
+  isbn varchar [unique]
+  created_at timestamp
+}
+
+/* Zentrale Entität */
+Table ausleihe {
+  id integer [primary key]
+  kunde_id integer [not null]        // FK -> kunden.person_id
+  mitarbeiter_id integer [not null]  // FK -> mitarbeiter.person_id
+  ausleih_datum date [not null]
+  faellig_datum date [not null]
+  status varchar
+  created_at timestamp
+}
+
+/* Ausleihe (1) -> (N) Bücher über Positionen/Stavke */
+Table loan_items {
+  id integer [primary key]
+  ausleihe_id integer [not null] // FK -> ausleihe.id
+  buch_id integer [not null]     // FK -> buecher.id
+  return_date date               // NULL = noch nicht zurückgegeben
+}
+
+/* Ausleihe (1) -> (N) Strafen */
+Table strafen {
+  id integer [primary key]
+  ausleihe_id integer [not null] // FK -> ausleihe.id
+  amount decimal(10,2) [not null]
+  grund varchar
+  paid boolean [not null, default: false]
+  created_at timestamp
+}
+
+/* Beziehungen (Refs) */
+Ref: kunden.person_id      > personen.id
+Ref: mitarbeiter.person_id > personen.id
+
+Ref: ausleihe.kunde_id       > kunden.person_id
+Ref: ausleihe.mitarbeiter_id > mitarbeiter.person_id
+
+Ref: loan_items.ausleihe_id > ausleihe.id
+Ref: loan_items.buch_id > ausleihe.id
+
+Ref: strafen.ausleihe_id > ausleihe.id
+
