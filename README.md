@@ -12,7 +12,7 @@ https://dbdiagram.io/d/Bibliothek-6965f6acd6e030a024de05e4
 Modell eines Bibliothekssystems mit den wichtigsten Entitäten:
 - `personen` (Basisdaten)
 - `kunden` und `mitarbeiter` als 1:1-Erweiterungen von `personen`
-- `buecher` (Bücher)
+- `bÜcher` (Bücher)
 - `ausleihe` (Ausleihen) + `loan_items` (Ausleihpositionen)
 - `strafen` (Strafen im Zusammenhang mit Ausleihen)
 
@@ -30,7 +30,6 @@ https://dbdiagram.io/d/Bibliothek-6965f6acd6e030a024de05e4
 - `db/schema.dbml` – DBML-Definition des Schemas (Quelle: dbdiagram.io)
 - `db/schema.sql` – SQL-Export des Schemas
 - `docs/erd.svg` – Export des ER-Diagramms (SVG)
-- (optional) `docs/Bibliothek.pdf` – PDF-Export des Diagramms
 
 ## Kurzbeschreibung des Modells
 
@@ -76,7 +75,7 @@ Positionen einer Ausleihe (welche Bücher ausgeliehen wurden).
 
 **Beziehungen:**
 - `ausleihe` 1 — N `loan_items`
-- `buecher` 1 — N `loan_items`
+- `bÜcher` 1 — N `loan_items`
 
 Damit wird eine N:M-Beziehung zwischen `ausleihe` und `buecher` über `loan_items` modelliert.
 
