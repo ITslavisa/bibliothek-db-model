@@ -33,31 +33,31 @@ https://dbdiagram.io/d/Bibliothek-6965f6acd6e030a024de05e4
 
 ## Kurzbeschreibung des Modells
 
-### personen
+### PERSONEN
 Basistabelle mit Personendaten.
 - Primärschlüssel: `id`
 - Attribute: `vorname`, `nachname`, `email` (unique), `telefon`, `created_at`
 
-### kunden (1:1-Erweiterung von personen)
+### KUNDEN (1:1-Erweiterung von personen)
 Ein Kunde ist eine Person mit zusätzlichen Kundendaten.
 - Primärschlüssel & Fremdschlüssel: `person_id` → `personen.id`
 - Attribute: `mitgliedsnummer` (unique), `join_date`
 
 **Beziehung:** `personen` 1 — 1 `kunden`
 
-### mitarbeiter (1:1-Erweiterung von personen)
+### MITARBEITER (1:1-Erweiterung von personen)
 Ein Mitarbeiter ist eine Person mit zusätzlichen Mitarbeiterdaten.
 - Primärschlüssel & Fremdschlüssel: `person_id` → `personen.id`
 - Attribute: `position`, `hire_date`
 
 **Beziehung:** `personen` 1 — 1 `mitarbeiter`
 
-### buecher
+### BÜCHER
 Tabelle für Buch-Metadaten.
 - Primärschlüssel: `id`
 - Attribute: `titel`, `autor`, `isbn`, `created_at`
 
-### ausleihe
+### AUSLEIHE
 Zentrale Entität für Ausleihvorgänge.
 - Primärschlüssel: `id`
 - Fremdschlüssel: `kunde_id` → `kunden.person_id`, `mitarbeiter_id` → `mitarbeiter.person_id`
@@ -67,19 +67,19 @@ Zentrale Entität für Ausleihvorgänge.
 - `kunden` 1 — N `ausleihe`
 - `mitarbeiter` 1 — N `ausleihe`
 
-### loan_items
+### LOAN_ITEMS
 Positionen einer Ausleihe (welche Bücher ausgeliehen wurden).
 - Primärschlüssel: `id`
 - Fremdschlüssel: `ausleihe_id` → `ausleihe.id`, `buch_id` → `buecher.id`
 - Attribute: `return_date`
 
-**Beziehungen:**
+**BBeziehungen:**
 - `ausleihe` 1 — N `loan_items`
 - `bÜcher` 1 — N `loan_items`
 
 Damit wird eine N:M-Beziehung zwischen `ausleihe` und `buecher` über `loan_items` modelliert.
 
-### strafen
+### STRAFEN
 Strafen (z.B. bei Verspätung) im Zusammenhang mit einer Ausleihe.
 - Primärschlüssel: `id`
 - Fremdschlüssel: `ausleihe_id` → `ausleihe.id`
